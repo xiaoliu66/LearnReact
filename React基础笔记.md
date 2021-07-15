@@ -32,3 +32,52 @@
 </body>
 ```
 
+## 2.虚拟DOM的两种创建方式
+
+1. 用jsx方式创建
+
+   ```html
+   <body>
+       <!-- 准备好一个容器 -->
+       <div id="test"></div>
+       <!-- 引入react核心库 -->
+       <script src="../js/react.development.js"></script>
+       <!-- 引入react-dom,用于支持react操作dom -->
+       <script src="../js/react-dom.development.js"></script>
+       <!-- 引入babel,用于将jsx转为js -->
+       <script src="../js/babel.min.js"></script>
+   
+       <script type="text/babel"> /*此处一定要写babel*/
+       const VDOM = (
+       	<h1 id="title">
+       		<span>Hello,React</span>
+           </h1>
+       )
+       ReactDOM.render(VDOM,document.getElementById('test'))
+   ```
+
+   
+
+2. 用纯js方式创建（不推荐）
+
+   ```html
+   <body>
+       <!-- 准备好一个容器 -->
+       <div id="test"></div>
+       <!-- 引入react核心库 -->
+       <script src="../js/react.development.js"></script>
+       <!-- 引入react-dom,用于支持react操作dom -->
+       <script src="../js/react-dom.development.js"></script>
+       
+   
+       <script type="text/javascript"> 
+           // 1.创建虚拟dom
+           const VDOM = React.createElement('h1',{'id':'title'},React.createElement('span',{},'hello,react')) /* 标签名称 标签属性 标签内容*/
+           // 2.渲染虚拟dom到页面
+           ReactDOM.render(VDOM,document.getElementById('test'))
+       </script>
+   </body>
+   ```
+
+   
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>hello_react</title>
+        <style>
+            .title {
+                background-color: orange;
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 准备好一个容器 -->
+        <div id="test"></div>
+        <!-- 引入react核心库 -->
+        <script src="../js/react.development.js"></script>
+        <!-- 引入react-dom,用于支持react操作dom -->
+        <script src="../js/react-dom.development.js"></script>
+        <!-- 引入babel,用于将jsx转为js -->
+        <script src="../js/babel.min.js"></script>
+
+        <script type="text/babel">
+            /*此处一定要写babel*/
+            const myId = "aTgUiGu";
+            const myData = "HeLlo,rEact";
+
+            // 1.创建虚拟dom
+            const VDOM = (
+                <div>
+                    <h1 className="title" id={myId.toLocaleLowerCase()}>
+                        <span style={{ color: "white" }}>{myData.toLowerCase()}</span>
+                    </h1>
+                    <input type="text"/>
+                </div>
+            );
+            // 2.渲染虚拟dom到页面
+            ReactDOM.render(VDOM, document.getElementById("test"));
+
+            /*
+                jsx语法规则：
+                1.定义虚拟DOM时，不要写引号。
+                2.标签中混入JS表达式要用{}。
+                3.样式的类名指定不要用class,要用className
+                4.内联样式，要用style={{key:value}}的形式去写
+                5.虚拟DOM只能有一个根标签
+                6.标签必须闭合
+                7.标签首字母
+                    （！）若小写字母开头，则将该标签转为html中同名元素。如果没有则报错。
+                    （2）若大写字母开头，react就去渲染对应的组件，若组件无定义，就报错。
+            */
+        </script>
+    </body>
+</html>
