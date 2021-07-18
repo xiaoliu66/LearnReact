@@ -213,3 +213,74 @@ jsx语法规则：
 
 ​	当应用是以多组件的方式实现, 这个应用就是一个组件化的应用
 
+## 2. React面向组件编程
+
+### 2.1 React中定义组件的两种方式
+
+**1.函数式组件**
+
+   ```html
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom,用于支持react操作dom -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel,用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 1.创建函数式组件
+        function Demo() {
+            console.log(this) // 此处的this是undefined,因为babel编译后开启了严格模式。
+            return <h2>我是用函数定义的组件（适用于【简单组件】的定义）</h2>
+        }
+        //2.渲染组件到页面
+        ReactDOM.render(<Demo/>,document.getElementById('test'))
+        /*
+            上面的代码执行后，
+            1.react解析组件标签，找到了Demo组件。
+            2.发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实DOM,随后呈现在页面中。
+        */
+    </script>
+
+</body>
+   ```
+
+**2.类式组件**
+
+```html
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom,用于支持react操作dom -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel,用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 1.创建类式组件
+        class MyComponent extends React.Component{
+            // render是放在哪里的？-MyComponent的原型对象上，供实例使用。
+            // render中的this是谁？-MyComponent的实例对象。
+            render() {
+                return <h2>我是用类定义的组件适用于【复杂组件】的定义</h2>
+            }
+        }
+        //2.渲染组件到页面
+        // 上面的render()和这里的render 没有任何
+        ReactDOM.render(<MyComponent/>,document.getElementById('test'))
+        /*
+            上面的代码执行后，
+            1.react解析组件标签，找到了Demo组件。
+            2.发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实DOM,随后呈现在页面中。
+            3.将render返回的虚拟DOM转为真实DOM,随后呈现在页面中。
+        */
+    </script>
+
+</body>
+```
+
