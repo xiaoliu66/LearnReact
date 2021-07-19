@@ -284,3 +284,66 @@ jsx语法规则：
 </body>
 ```
 
+### 2.2 组件实例三大属性__state
+
+1.完全写法
+
+```html
+<body>
+	<!-- 准备好一个“容器” -->
+	<div id="test"></div>
+	
+	<!-- 引入react核心库 -->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!-- 引入react-dom，用于支持react操作DOM -->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+
+	<script type="text/babel">
+		//1.创建组件
+		class Weather extends React.Component{
+			
+			//构造器调用几次？ ———— 1次
+			constructor(props){
+				console.log('constructor');
+				super(props)
+				//初始化状态
+				this.state = {isHot:false,wind:'微风'}
+				//解决changeWeather中this指向问题
+				this.changeWeather = this.changeWeather.bind(this)
+			}
+
+			//render调用几次？ ———— 1+n次 1是初始化的那次 n是状态更新的次数
+			render(){
+				console.log('render');
+				//读取状态
+				const {isHot,wind} = this.state
+				// 事件名称后面不要带括号，加了括号在页面渲染完后就会自动调用该方法。 React会在触发该事件之后自动调用该方法。
+				return <h1 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}，{wind}</h1>
+			}
+
+			//changeWeather调用几次？ ———— 点几次调几次
+			changeWeather(){
+				//changeWeather放在哪里？ ———— Weather的原型对象上，供实例使用
+				//由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用
+				//类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined
+				
+				console.log('changeWeather');
+				//获取原来的isHot值
+				const isHot = this.state.isHot
+				//严重注意：状态必须通过setState进行更新,且更新是一种合并，不是替换。
+				this.setState({isHot:!isHot})
+				console.log(this);
+
+				//严重注意：状态(state)不可直接更改，下面这行就是直接更改！！！
+				//this.state.isHot = !isHot //这是错误的写法
+			}
+		}
+		//2.渲染组件到页面
+		ReactDOM.render(<Weather/>,document.getElementById('test'))
+				
+	</script>
+</body>
+```
+
