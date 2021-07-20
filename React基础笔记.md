@@ -286,7 +286,7 @@ jsx语法规则：
 
 ### 2.2 组件实例三大属性__state
 
-1.完全写法
+#### 2.2.1state完全写法
 
 ```html
 <body>
@@ -347,3 +347,67 @@ jsx语法规则：
 </body>
 ```
 
+#### 2.2.2 state简写
+
+```html
+<body>
+        <!-- 准备好一个容器 -->
+        <div id="test"></div>
+        <!-- 引入react核心库 -->
+        <script src="../js/react.development.js"></script>
+        <!-- 引入react-dom,用于支持react操作dom -->
+        <script src="../js/react-dom.development.js"></script>
+        <!-- 引入babel,用于将jsx转为js -->
+        <script src="../js/babel.min.js"></script>
+
+        <script type="text/babel">
+            // 1.创建组件
+            class Weather extends React.Component {
+                // constructor(props) {
+                //     super(props);
+                //     // 初始化状态
+                //     this.state = { isHot: true, wind: '微风' };
+                //     //  解决changeWeather中this指向问题
+                //     this.changeWeather = this.changeWeather.bind(this)
+                // }
+
+                // 初始化状态
+                state = { isHot: true, wind: "微风" };
+
+                render() {
+                    return <h2 onClick={this.changeWeather}>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h2>;
+                }
+
+                // 自定义方法--要用赋值语句和箭头函数的形式
+                changeWeather = () => {
+                    // 状态state 不可直接更改！
+                    // this.state.isHot = !this.state.isHot
+                    const isHot = this.state.isHot;
+                    // 状态必须通过setState进行更新，且更新是一种合并，不是替换。
+                    this.setState({ isHot: !isHot });
+                };
+            }
+
+            // 2.渲染组件
+            ReactDOM.render(<Weather />, document.getElementById("test"));
+        </script>
+    </body>
+```
+
+#### 2.2.3 state总结
+
+1. state是组件对象最重要的属性, **值是对象**(可以包含多个key-value的组合)
+
+2. 组件被称为"状态机", 通过更新组件的state来更新对应的页面显示(重新渲染组件)
+
+**<font color="red">注意：</font >**
+
+1. 组件中render方法中的this为组件实例对象
+
+2. 组件自定义的方法中this为undefined，如何解决？
+
+   a)   强制绑定this: 通过函数对象的bind()
+
+   b)   箭头函数+赋值语句
+
+3. 状态数据，不能直接修改或更新。必须通过setState()方法。
