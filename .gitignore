@@ -1,4 +1,2 @@
-React_基础/js/babel.min.js
-React_基础/js/prop-types.js
-React_基础/js/react-dom.development.js
-React_基础/js/react.development.js
+React_基础/js/*
+*/test/*
