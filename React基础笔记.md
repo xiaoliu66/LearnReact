@@ -463,3 +463,69 @@ jsx语法规则：
 
 ```
 
+#### 2.3.2 对props进行限制
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 准备好一个容器 -->
+        <div id="test"></div>
+        <div id="test1"></div>
+        <div id="test2"></div>
+        <!-- 引入react核心库 -->
+        <script src="../js/react.development.js"></script>
+        <!-- 引入react-dom,用于支持react操作dom -->
+        <script src="../js/react-dom.development.js"></script>
+        <!-- 引入babel,用于将jsx转为js -->
+        <script src="../js/babel.min.js"></script>
+        <!-- 引入prop-types,用于对组件标签进行限制 -->
+        <script src="../js/prop-types.js"></script>
+
+        <script type="text/babel">
+            // 创建组件
+            class Person extends React.Component {
+                render() {
+                    return (
+                        <ul>
+                            <li>姓名：{this.props.name}</li>
+                            <li>性别：{this.props.sex}</li>
+                            <li>年龄：{this.props.age}</li>
+                        </ul>
+                    );
+                }
+            }
+            // 对标签属性进行类型、必要性的限制
+            Person.propTypes = {
+                name:PropTypes.string.isRequired,
+                sex:PropTypes.string,
+                age:PropTypes.number,
+                speak:PropTypes.func,
+            }
+            // 指定默认标签属性值
+            Person.defaultProps = {
+                sex:'不男不女',
+                age:18
+            }
+
+            // 渲染组件到页面
+            ReactDOM.render(<Person name='jerry' age={19} speak={speak}/>,document.getElementById('test'))
+            ReactDOM.render(<Person name='tom'  sex='男'/>,document.getElementById('test1'))
+            const p = {name:'老刘',age:18,sex:'女',speak:speak}
+            ReactDOM.render(<Person {...p}/>,document.getElementById("test2"))
+            // ReactDOM.render(<Person name='老刘' age='29' sex='女'/>,document.getElementById('test2'))
+            function speak() {
+                console.log("说话。。")
+            }
+        </script>
+    </body>
+</html>
+
+```
+
