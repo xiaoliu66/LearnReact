@@ -414,6 +414,17 @@ jsx语法规则：
 
 ### 2.3 组件实例三大属性__props
 
+**简介**：
+
+1.   每个组件对象都会有props(properties的简写)属性
+2.   组件标签的所有属性都保存在props中
+
+**作用：**
+
+1. 通过标签属性**从组件外向组件内传递变化的数据**
+
+2. 注意: 组件内部不要修改props数据
+
 #### 2.3.1 props的基本使用
 
 ```html
@@ -664,3 +675,64 @@ jsx语法规则：
 
 ```
 
+#### 2.3.5 props的总结
+
+1. **内部读取某个属性值**
+
+```javascript
+this.props.name
+```
+
+2. **对props中的属性值进行类型限制和必要性限制**
+
+第一种方式（React v15.5 开始已弃用）：
+
+```javascript
+Person.propTypes = {      
+    name: React.PropTypes.string.isRequired,      
+    age: React.PropTypes.number     
+}      
+```
+
+第二种方式（新）：使用prop-types库进限制（需要引入prop-types库）
+
+ ```javascript
+ Person.propTypes = {     
+     name: PropTypes.string.isRequired,      
+     age: PropTypes.number   
+ }   
+ ```
+
+3. **扩展属性: 将对象的所有属性通过props传递**
+
+     ```javascript
+     <Person {...person}/>
+     ```
+
+4. **默认属性值：**
+
+     ```javascript
+     Person.defaultProps = {
+         sex: "不男不女",
+         age: 18,
+     };
+     ```
+
+5. **组件类的构造函数**
+
+       ```javascript
+       constructor(props){
+           super(props);
+           console.log(pro)
+       }
+       ```
+
+
+
+
+
+ 
+
+ 
+
+ 
