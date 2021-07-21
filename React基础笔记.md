@@ -723,16 +723,304 @@ Person.propTypes = {
        ```javascript
        constructor(props){
            super(props);
-           console.log(pro)
+           console.log(props)
        }
        ```
 
 
 
+### 2.4 组件实例三大属性__refs
 
+理解：组件内的标签可以定义ref属性来标识自己
 
+#### 2.4.1 字符串形式的refs
+
+**注意：**React官方说这种形式的refs会存在效率问题，不推荐使用。将会在未来的版本中移除。
+
+ ```html
+ <!DOCTYPE html>
+ <html lang="en">
+     <head>
+         <meta charset="UTF-8" />
+         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <title>Document</title>
+     </head>
+     <body>
+         <!-- 准备好一个容器 -->
+         <div id="test"></div>
  
-
+         <!-- 引入react核心库 -->
+         <script src="../js/react.development.js"></script>
+         <!-- 引入react-dom,用于支持react操作dom -->
+         <script src="../js/react-dom.development.js"></script>
+         <!-- 引入babel,用于将jsx转为js -->
+         <script src="../js/babel.min.js"></script>
  
-
+         <script type="text/babel">
+             // 创建组件
+             class Demo extends React.Component {
+                 // 展示左侧数据
+                 showData = () => {
+                     const {input1} = this.refs
+                     alert(input1.value)
+                 };
+                 // 展示右侧输入框的数据
+                 showData2 = ()=>{
+                     const {input2} = this.refs
+                     alert(input2.value)
+                 }
  
+                 render() {
+                     return (
+                         <div>
+                             <input ref="input1" type="text" placeholder="点击按钮提示数据" />
+                             <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;&nbsp;
+                             <input ref="input2" onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
+                         </div>
+                     );
+                 }
+             }
+         
+             
+ 
+             // 渲染组件到页面
+             ReactDOM.render(<Demo />, document.getElementById("test"));
+         </script>
+     </body>
+ </html>
+ 
+ ```
+
+#### 2.4.2 回调函数形式的refs
+
+回调函数：1.自己定义的函数 2. 自己没有调用 3. 最终这个函数执行了。
+
+ ```html
+ <!DOCTYPE html>
+ <html lang="en">
+     <head>
+         <meta charset="UTF-8" />
+         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <title>Document</title>
+     </head>
+     <body>
+         <!-- 准备好一个容器 -->
+         <div id="test"></div>
+ 
+         <!-- 引入react核心库 -->
+         <script src="../js/react.development.js"></script>
+         <!-- 引入react-dom,用于支持react操作dom -->
+         <script src="../js/react-dom.development.js"></script>
+         <!-- 引入babel,用于将jsx转为js -->
+         <script src="../js/babel.min.js"></script>
+ 
+         <script type="text/babel">
+             // 创建组件
+             class Demo extends React.Component {
+                 // 展示左侧数据
+                 showData = () => {
+                     // const {input1} = this.refs
+                     // alert(input1.value)
+                     console.log(this);
+                     // 这里取input1节点就不从refs上取了，直接从this上取。
+                     const {input1} = this
+                     alert(input1.value)
+                 };
+                 // 展示右侧输入框的数据
+                 showData2 = ()=>{
+                     // const {input2} = this.refs
+                     // alert(input2.value)
+                     const {input2} = this
+                     alert(input2.value)
+                 }
+ 
+                 render() {
+                     // ref = {(currentNode)=>{ this.input1 = currentNode }}
+                     // ref中写箭头函数 react会自动帮你调用。
+                     return (
+                         <div>
+                             <input ref={currentNode => this.input1 = currentNode} type="text" placeholder="点击按钮提示数据" />
+                             <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;&nbsp;
+                             <input ref={currentNode => this.input2 = currentNode} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
+                         </div>
+                     );
+                 }
+             }
+         
+             
+ 
+             // 渲染组件到页面
+             ReactDOM.render(<Demo />, document.getElementById("test"));
+         </script>
+     </body>
+ </html>
+ 
+ ```
+
+
+
+####  2.4.3 回调ref中回调函数执行次数的问题
+
+React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.html
+
+> ### 关于回调 refs 的说明
+>
+> 如果 `ref` 回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数 `null`，然后第二次会传入参数 DOM 元素。这是因为在每次渲染时会创建一个新的函数实例，所以 React 清空旧的 ref 并且设置新的。通过将 ref 的回调函数定义成 class 的绑定函数的方式可以避免上述问题，但是大多数情况下它是无关紧要的。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 准备好一个容器 -->
+        <div id="test"></div>
+
+        <!-- 引入react核心库 -->
+        <script src="../js/react.development.js"></script>
+        <!-- 引入react-dom,用于支持react操作dom -->
+        <script src="../js/react-dom.development.js"></script>
+        <!-- 引入babel,用于将jsx转为js -->
+        <script src="../js/babel.min.js"></script>
+
+        <script type="text/babel">
+            // 创建组件
+            class Demo extends React.Component {
+                state = { isHot: true };
+
+                // 展示左侧数据
+                showData = () => {
+                    // const {input1} = this.refs
+                    // alert(input1.value)
+                    const { input1 } = this;
+                    alert(input1.value);
+                };
+                // 展示右侧输入框的数据
+                showData2 = () => {
+                    // const {input2} = this.refs
+                    // alert(input2.value)
+                    const { input2 } = this;
+                    alert(input2.value);
+                };
+
+                changeWeather = () => {
+                    const { isHot } = this.state;
+                    this.setState({ isHot: !isHot });
+                };
+
+                // 类的绑定函数形式
+                saveInput = (c) => {
+                    this.input1 = c;
+                    console.log("@", c);
+                };
+
+                render() {
+                    const { isHot } = this.state;
+                    return (
+                        <div>
+                            <h2>今天天气很{isHot ? "炎热" : "凉爽"}</h2>
+                        {/* 内联函数<input ref={(c) => {this.input1 = c;console.log('@',c);}}/>*/}
+                            <input ref={this.saveInput} />
+                            <button onClick={this.changeWeather}>切换状态</button>&nbsp;&nbsp;
+                            {/* <input ref={c => this.input2 = c} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" /> */}
+                        </div>
+                    );
+                }
+            }
+
+            // 渲染组件到页面
+            ReactDOM.render(<Demo />, document.getElementById("test"));
+        </script>
+    </body>
+</html>
+
+```
+
+#### 2.4.4 createRef的使用
+
+这种写法是官方推荐的
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 准备好一个容器 -->
+        <div id="test"></div>
+
+        <!-- 引入react核心库 -->
+        <script src="../js/react.development.js"></script>
+        <!-- 引入react-dom,用于支持react操作dom -->
+        <script src="../js/react-dom.development.js"></script>
+        <!-- 引入babel,用于将jsx转为js -->
+        <script src="../js/babel.min.js"></script>
+
+        <script type="text/babel">
+            // 创建组件
+            class Demo extends React.Component {
+                // React.creatRef调用后可以返回一个容器。该容器可以存储被ref锁标识的节点。该容器是专人专用的。
+                myRef = React.createRef();
+                myRef2 = React.createRef();
+                // 展示左侧数据
+                showData = () => {
+                    alert(this.myRef.current.value)
+                };
+                // 展示右侧输入框的数据
+                showData2 = ()=>{
+                    alert(this.myRef2.current.value)
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <input ref={this.myRef} type="text" placeholder="点击按钮提示数据" />
+                            <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;&nbsp;
+                            <input ref={this.myRef2} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
+                        </div>
+                    );
+                }
+            }
+        
+            
+
+            // 渲染组件到页面
+            ReactDOM.render(<Demo />, document.getElementById("test"));
+        </script>
+    </body>
+</html>
+
+```
+
+#### 2.4.5 refs的总结
+
+1. 字符串形式的ref
+
+        ```html
+        <input ref="input1"/>
+        ```
+
+2. 回调形式的ref
+
+   ```html
+   <input ref={(c)=>{this.input1 = c}}/>
+   ```
+
+3. createRef创建ref容器
+
+```html
+myRef = React.createRef()
+<input ref={this.myRef}/>
+```
+
+​           
