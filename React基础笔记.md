@@ -1088,3 +1088,136 @@ myRef = React.createRef()
 
 ```
 
+
+
+### 2.6  收集表单数据
+
+实际开发中，受控组件用的比较多。
+
+#### 2.6.1 非受控组件
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 准备好一个容器 -->
+        <div id="test"></div>
+
+        <!-- 引入react核心库 -->
+        <script src="../js/react.development.js"></script>
+        <!-- 引入react-dom,用于支持react操作dom -->
+        <script src="../js/react-dom.development.js"></script>
+        <!-- 引入babel,用于将jsx转为js -->
+        <script src="../js/babel.min.js"></script>
+
+        <script type="text/babel">
+            class Login extends React.Component {
+            
+                render() {
+                    return (
+                        <form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
+                            用户名：
+                            <input
+                                ref={(c) => {
+                                    this.username = c;
+                                }}
+                                type="text"
+                            />
+                            密码：
+                            <input
+                                ref={(c) => {
+                                    this.password = c;
+                                }}
+                                type="password"
+                            />
+                            <button type="submit">登录</button>
+                        </form>
+                    );
+                }
+
+                handleSubmit = (event) => {
+                    event.preventDefault();
+                    const {username,password} = this;
+                    alert(`用户名为：${username.value},密码为：${password.value}`);
+                };
+            }
+
+            ReactDOM.render(<Login />, document.getElementById("test"));
+        </script>
+    </body>
+</html>
+
+```
+
+#### 2.6.2 受控组件
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 准备好一个容器 -->
+        <div id="test"></div>
+
+        <!-- 引入react核心库 -->
+        <script src="../js/react.development.js"></script>
+        <!-- 引入react-dom,用于支持react操作dom -->
+        <script src="../js/react-dom.development.js"></script>
+        <!-- 引入babel,用于将jsx转为js -->
+        <script src="../js/babel.min.js"></script>
+
+        <script type="text/babel">
+            class Login extends React.Component {
+                state = {
+                    username:'',
+                    password:''
+                }
+
+
+                render() {
+                    return (
+                        <form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
+                            用户名：
+                            <input onChange={this.getUserName} type="text" />
+                            密码：
+                            <input onChange={this.getPassWord} type="password" />
+                            <button type="submit">登录</button>
+                        </form>
+                    );
+                }
+
+                handleSubmit = (event) => {
+                    event.preventDefault();
+                    const { username, password } = this.state;
+                    alert(`用户名为：${username},密码为：${password}`);
+                };
+
+                getUserName = (event) => {
+                    // console.log(event.target.value);
+                    this.setState({username:event.target.value})
+                }
+
+                getPassWord = (event) => {
+                    this.setState({password:event.target.value})
+                }
+
+            }
+
+            ReactDOM.render(<Login />, document.getElementById("test"));
+        </script>
+    </body>
+</html>
+
+```
+
