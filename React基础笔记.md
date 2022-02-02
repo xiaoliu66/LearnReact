@@ -12,8 +12,6 @@
 
 * babel.min.js：解析jsx语法转为JS代码的库。
 
-  
-
 ```html
 <body>
     <!-- 准备好一个容器 -->
@@ -39,7 +37,7 @@
 #### 1.2.1 两种方式
 
 1. 用jsx方式创建
-
+   
    ```html
    <body>
        <!-- 准备好一个容器 -->
@@ -53,17 +51,15 @@
    
        <script type="text/babel"> /*此处一定要写babel*/
        const VDOM = (
-       	<h1 id="title">
-       		<span>Hello,React</span>
+           <h1 id="title">
+               <span>Hello,React</span>
            </h1>
        )
        ReactDOM.render(VDOM,document.getElementById('test'))
    ```
 
-   
-
 2. 用纯js方式创建（不推荐）
-
+   
    ```html
    <body>
        <!-- 准备好一个容器 -->
@@ -72,15 +68,16 @@
        <script src="../js/react.development.js"></script>
        <!-- 引入react-dom,用于支持react操作dom -->
        <script src="../js/react-dom.development.js"></script>
-       
-   
+   ```
+
        <script type="text/javascript"> 
            // 1.创建虚拟dom
            const VDOM = React.createElement('h1',{'id':'title'},React.createElement('span',{},'hello,react')) /* 标签名称 标签属性 标签内容*/
            // 2.渲染虚拟dom到页面
            ReactDOM.render(VDOM,document.getElementById('test'))
        </script>
-   </body>
+
+</body>
    ```
 
 #### 1.2.2 虚拟DOM和真实DOM的比较
@@ -113,7 +110,7 @@
     </body>
 ```
 
-<img src="D:\web\LearnReact\React基础笔记.assets\image-20210715204255463.png" alt="image-20210715204255463" style="zoom:80%;" />
+<img src="./React基础笔记.assets/image-20210715204255463.png" alt="image-20210715204255463" style="zoom:80%;" />
 关于虚拟DOM:
 
 **1.本质是Object类型的对象**
@@ -157,33 +154,33 @@ jsx语法规则：
 
         <script type="text/babel">
             //1.创建虚拟DOM
-		const VDOM = (
-			<div>
-				<h2 className="title" id={myId.toLowerCase()}>
-					<span style={{color:'white',fontSize:'29px'}}>{myData.toLowerCase()}</span>
-				</h2>
-				<h2 className="title" id={myId.toUpperCase()}>
-					<span style={{color:'white',fontSize:'29px'}}>{myData.toLowerCase()}</span>
-				</h2>
-				<input type="text"/>
-			</div>
-		)
-		//2.渲染虚拟DOM到页面
-		ReactDOM.render(VDOM,document.getElementById('test'))
+        const VDOM = (
+            <div>
+                <h2 className="title" id={myId.toLowerCase()}>
+                    <span style={{color:'white',fontSize:'29px'}}>{myData.toLowerCase()}</span>
+                </h2>
+                <h2 className="title" id={myId.toUpperCase()}>
+                    <span style={{color:'white',fontSize:'29px'}}>{myData.toLowerCase()}</span>
+                </h2>
+                <input type="text"/>
+            </div>
+        )
+        //2.渲染虚拟DOM到页面
+        ReactDOM.render(VDOM,document.getElementById('test'))
 
-		/* 
-				jsx语法规则：
-						1.定义虚拟DOM时，不要写引号。
-						2.标签中混入JS表达式时要用{}。
-						3.样式的类名指定不要用class，要用className。
-						4.内联样式，要用style={{key:value}}的形式去写。
-						5.只有一个根标签
-						6.标签必须闭合
-						7.标签首字母
-								(1).若小写字母开头，则将该标签转为html中同名元素，若html中无该标签对应的同名元素，则报错。
-								(2).若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
+        /* 
+                jsx语法规则：
+                        1.定义虚拟DOM时，不要写引号。
+                        2.标签中混入JS表达式时要用{}。
+                        3.样式的类名指定不要用class，要用className。
+                        4.内联样式，要用style={{key:value}}的形式去写。
+                        5.只有一个根标签
+                        6.标签必须闭合
+                        7.标签首字母
+                                (1).若小写字母开头，则将该标签转为html中同名元素，若html中无该标签对应的同名元素，则报错。
+                                (2).若大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
 
-		 */
+         */
         </script>
     </body>
 ```
@@ -193,6 +190,7 @@ jsx语法规则：
 #### 1.4.1 模块
 
 1. 理解：向外提供特定功能的js程序, 一般就是一个js文件
+
 2. 为什么要拆成模块：随着业务逻辑增加，代码越来越多且复杂。
 
 3. 作用： 复用js, 简化js的编写, 提高js运行效率
@@ -207,11 +205,11 @@ jsx语法规则：
 
 #### 1.4.3 模块化
 
-​	当应用的js都以模块来编写的，这个应用就是一个模块化的应用
+​    当应用的js都以模块来编写的，这个应用就是一个模块化的应用
 
 #### 1.4.4 组件化
 
-​	当应用是以多组件的方式实现, 这个应用就是一个组件化的应用
+​    当应用是以多组件的方式实现, 这个应用就是一个组件化的应用
 
 ## 2. React面向组件编程
 
@@ -219,34 +217,34 @@ jsx语法规则：
 
 **1.函数式组件**
 
-   ```html
+```html
 <body>
-    <!-- 准备好一个容器 -->
-    <div id="test"></div>
-    <!-- 引入react核心库 -->
-    <script src="../js/react.development.js"></script>
-    <!-- 引入react-dom,用于支持react操作dom -->
-    <script src="../js/react-dom.development.js"></script>
-    <!-- 引入babel,用于将jsx转为js -->
-    <script src="../js/babel.min.js"></script>
+ <!-- 准备好一个容器 -->
+ <div id="test"></div>
+ <!-- 引入react核心库 -->
+ <script src="../js/react.development.js"></script>
+ <!-- 引入react-dom,用于支持react操作dom -->
+ <script src="../js/react-dom.development.js"></script>
+ <!-- 引入babel,用于将jsx转为js -->
+ <script src="../js/babel.min.js"></script>
 
-    <script type="text/babel">
-        // 1.创建函数式组件
-        function Demo() {
-            console.log(this) // 此处的this是undefined,因为babel编译后开启了严格模式。
-            return <h2>我是用函数定义的组件（适用于【简单组件】的定义）</h2>
-        }
-        //2.渲染组件到页面
-        ReactDOM.render(<Demo/>,document.getElementById('test'))
-        /*
-            上面的代码执行后，
-            1.react解析组件标签，找到了Demo组件。
-            2.发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实DOM,随后呈现在页面中。
-        */
-    </script>
+ <script type="text/babel">
+     // 1.创建函数式组件
+     function Demo() {
+         console.log(this) // 此处的this是undefined,因为babel编译后开启了严格模式。
+         return <h2>我是用函数定义的组件（适用于【简单组件】的定义）</h2>
+     }
+     //2.渲染组件到页面
+     ReactDOM.render(<Demo/>,document.getElementById('test'))
+     /*
+         上面的代码执行后，
+         1.react解析组件标签，找到了Demo组件。
+         2.发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实DOM,随后呈现在页面中。
+     */
+ </script>
 
 </body>
-   ```
+```
 
 **2.类式组件**
 
@@ -290,60 +288,60 @@ jsx语法规则：
 
 ```html
 <body>
-	<!-- 准备好一个“容器” -->
-	<div id="test"></div>
-	
-	<!-- 引入react核心库 -->
-	<script type="text/javascript" src="../js/react.development.js"></script>
-	<!-- 引入react-dom，用于支持react操作DOM -->
-	<script type="text/javascript" src="../js/react-dom.development.js"></script>
-	<!-- 引入babel，用于将jsx转为js -->
-	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
 
-	<script type="text/babel">
-		//1.创建组件
-		class Weather extends React.Component{
-			
-			//构造器调用几次？ ———— 1次
-			constructor(props){
-				console.log('constructor');
-				super(props)
-				//初始化状态
-				this.state = {isHot:false,wind:'微风'}
-				//解决changeWeather中this指向问题
-				this.changeWeather = this.changeWeather.bind(this)
-			}
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
 
-			//render调用几次？ ———— 1+n次 1是初始化的那次 n是状态更新的次数
-			render(){
-				console.log('render');
-				//读取状态
-				const {isHot,wind} = this.state
-				// 事件名称后面不要带括号，加了括号在页面渲染完后就会自动调用该方法。 React会在触发该事件之后自动调用该方法。
-				return <h1 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}，{wind}</h1>
-			}
+    <script type="text/babel">
+        //1.创建组件
+        class Weather extends React.Component{
 
-			//changeWeather调用几次？ ———— 点几次调几次
-			changeWeather(){
-				//changeWeather放在哪里？ ———— Weather的原型对象上，供实例使用
-				//由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用
-				//类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined
-				
-				console.log('changeWeather');
-				//获取原来的isHot值
-				const isHot = this.state.isHot
-				//严重注意：状态必须通过setState进行更新,且更新是一种合并，不是替换。
-				this.setState({isHot:!isHot})
-				console.log(this);
+            //构造器调用几次？ ———— 1次
+            constructor(props){
+                console.log('constructor');
+                super(props)
+                //初始化状态
+                this.state = {isHot:false,wind:'微风'}
+                //解决changeWeather中this指向问题
+                this.changeWeather = this.changeWeather.bind(this)
+            }
 
-				//严重注意：状态(state)不可直接更改，下面这行就是直接更改！！！
-				//this.state.isHot = !isHot //这是错误的写法
-			}
-		}
-		//2.渲染组件到页面
-		ReactDOM.render(<Weather/>,document.getElementById('test'))
-				
-	</script>
+            //render调用几次？ ———— 1+n次 1是初始化的那次 n是状态更新的次数
+            render(){
+                console.log('render');
+                //读取状态
+                const {isHot,wind} = this.state
+                // 事件名称后面不要带括号，加了括号在页面渲染完后就会自动调用该方法。 React会在触发该事件之后自动调用该方法。
+                return <h1 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}，{wind}</h1>
+            }
+
+            //changeWeather调用几次？ ———— 点几次调几次
+            changeWeather(){
+                //changeWeather放在哪里？ ———— Weather的原型对象上，供实例使用
+                //由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用
+                //类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined
+
+                console.log('changeWeather');
+                //获取原来的isHot值
+                const isHot = this.state.isHot
+                //严重注意：状态必须通过setState进行更新,且更新是一种合并，不是替换。
+                this.setState({isHot:!isHot})
+                console.log(this);
+
+                //严重注意：状态(state)不可直接更改，下面这行就是直接更改！！！
+                //this.state.isHot = !isHot //这是错误的写法
+            }
+        }
+        //2.渲染组件到页面
+        ReactDOM.render(<Weather/>,document.getElementById('test'))
+
+    </script>
 </body>
 ```
 
@@ -405,9 +403,9 @@ jsx语法规则：
 1. 组件中render方法中的this为组件实例对象
 
 2. 组件自定义的方法中this为undefined，如何解决？
-
+   
    a)   强制绑定this: 通过函数对象的bind()
-
+   
    b)   箭头函数+赋值语句
 
 3. 状态数据，不能直接修改或更新。必须通过setState()方法。
@@ -416,8 +414,8 @@ jsx语法规则：
 
 **简介**：
 
-1.   每个组件对象都会有props(properties的简写)属性
-2.   组件标签的所有属性都保存在props中
+1. 每个组件对象都会有props(properties的简写)属性
+2. 组件标签的所有属性都保存在props中
 
 **作用：**
 
@@ -471,7 +469,6 @@ jsx语法规则：
         </script>
     </body>
 </html>
-
 ```
 
 #### 2.3.2 对props进行限制
@@ -537,7 +534,6 @@ jsx语法规则：
         </script>
     </body>
 </html>
-
 ```
 
 #### 2.3.3 props限制的简写方式
@@ -607,7 +603,6 @@ jsx语法规则：
         </script>
     </body>
 </html>
-
 ```
 
 #### 2.3.4 函数组件使用props
@@ -672,7 +667,6 @@ jsx语法规则：
         </script>
     </body>
 </html>
-
 ```
 
 #### 2.3.5 props的总结
@@ -696,38 +690,36 @@ Person.propTypes = {
 
 第二种方式（新）：使用prop-types库进限制（需要引入prop-types库）
 
- ```javascript
- Person.propTypes = {     
-     name: PropTypes.string.isRequired,      
-     age: PropTypes.number   
- }   
- ```
+```javascript
+Person.propTypes = {     
+    name: PropTypes.string.isRequired,      
+    age: PropTypes.number   
+}   
+```
 
 3. **扩展属性: 将对象的所有属性通过props传递**
-
-     ```javascript
-     <Person {...person}/>
-     ```
+   
+   ```javascript
+   <Person {...person}/>
+   ```
 
 4. **默认属性值：**
-
-     ```javascript
-     Person.defaultProps = {
-         sex: "不男不女",
-         age: 18,
-     };
-     ```
+   
+   ```javascript
+   Person.defaultProps = {
+       sex: "不男不女",
+       age: 18,
+   };
+   ```
 
 5. **组件类的构造函数**
-
+   
        ```javascript
        constructor(props){
            super(props);
            console.log(props)
        }
        ```
-
-
 
 ### 2.4 组件实例三大属性__refs
 
@@ -737,136 +729,132 @@ Person.propTypes = {
 
 **注意：**React官方说这种形式的refs会存在效率问题，不推荐使用。将会在未来的版本中移除。
 
- ```html
- <!DOCTYPE html>
- <html lang="en">
-     <head>
-         <meta charset="UTF-8" />
-         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <title>Document</title>
-     </head>
-     <body>
-         <!-- 准备好一个容器 -->
-         <div id="test"></div>
- 
-         <!-- 引入react核心库 -->
-         <script src="../js/react.development.js"></script>
-         <!-- 引入react-dom,用于支持react操作dom -->
-         <script src="../js/react-dom.development.js"></script>
-         <!-- 引入babel,用于将jsx转为js -->
-         <script src="../js/babel.min.js"></script>
- 
-         <script type="text/babel">
-             // 创建组件
-             class Demo extends React.Component {
-                 // 展示左侧数据
-                 showData = () => {
-                     const {input1} = this.refs
-                     alert(input1.value)
-                 };
-                 // 展示右侧输入框的数据
-                 showData2 = ()=>{
-                     const {input2} = this.refs
-                     alert(input2.value)
-                 }
- 
-                 render() {
-                     return (
-                         <div>
-                             <input ref="input1" type="text" placeholder="点击按钮提示数据" />
-                             <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;&nbsp;
-                             <input ref="input2" onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
-                         </div>
-                     );
-                 }
-             }
-         
-             
- 
-             // 渲染组件到页面
-             ReactDOM.render(<Demo />, document.getElementById("test"));
-         </script>
-     </body>
- </html>
- 
- ```
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 准备好一个容器 -->
+        <div id="test"></div>
+
+        <!-- 引入react核心库 -->
+        <script src="../js/react.development.js"></script>
+        <!-- 引入react-dom,用于支持react操作dom -->
+        <script src="../js/react-dom.development.js"></script>
+        <!-- 引入babel,用于将jsx转为js -->
+        <script src="../js/babel.min.js"></script>
+
+        <script type="text/babel">
+            // 创建组件
+            class Demo extends React.Component {
+                // 展示左侧数据
+                showData = () => {
+                    const {input1} = this.refs
+                    alert(input1.value)
+                };
+                // 展示右侧输入框的数据
+                showData2 = ()=>{
+                    const {input2} = this.refs
+                    alert(input2.value)
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <input ref="input1" type="text" placeholder="点击按钮提示数据" />
+                            <button onClick={this.showData}>点我提示左侧的数据</button>  
+                            <input ref="input2" onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
+                        </div>
+                    );
+                }
+            }
+
+
+
+            // 渲染组件到页面
+            ReactDOM.render(<Demo />, document.getElementById("test"));
+        </script>
+    </body>
+</html>
+```
 
 #### 2.4.2 回调函数形式的refs
 
 回调函数：1.自己定义的函数 2. 自己没有调用 3. 最终这个函数执行了。
 
- ```html
- <!DOCTYPE html>
- <html lang="en">
-     <head>
-         <meta charset="UTF-8" />
-         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-         <title>Document</title>
-     </head>
-     <body>
-         <!-- 准备好一个容器 -->
-         <div id="test"></div>
- 
-         <!-- 引入react核心库 -->
-         <script src="../js/react.development.js"></script>
-         <!-- 引入react-dom,用于支持react操作dom -->
-         <script src="../js/react-dom.development.js"></script>
-         <!-- 引入babel,用于将jsx转为js -->
-         <script src="../js/babel.min.js"></script>
- 
-         <script type="text/babel">
-             // 创建组件
-             class Demo extends React.Component {
-                 // 展示左侧数据
-                 showData = () => {
-                     // const {input1} = this.refs
-                     // alert(input1.value)
-                     console.log(this);
-                     // 这里取input1节点就不从refs上取了，直接从this上取。
-                     const {input1} = this
-                     alert(input1.value)
-                 };
-                 // 展示右侧输入框的数据
-                 showData2 = ()=>{
-                     // const {input2} = this.refs
-                     // alert(input2.value)
-                     const {input2} = this
-                     alert(input2.value)
-                 }
- 
-                 render() {
-                     // ref = {(currentNode)=>{ this.input1 = currentNode }}
-                     // ref中写箭头函数 react会自动帮你调用。
-                     return (
-                         <div>
-                             <input ref={currentNode => this.input1 = currentNode} type="text" placeholder="点击按钮提示数据" />
-                             <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;&nbsp;
-                             <input ref={currentNode => this.input2 = currentNode} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
-                         </div>
-                     );
-                 }
-             }
-         
-             
- 
-             // 渲染组件到页面
-             ReactDOM.render(<Demo />, document.getElementById("test"));
-         </script>
-     </body>
- </html>
- 
- ```
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 准备好一个容器 -->
+        <div id="test"></div>
+
+        <!-- 引入react核心库 -->
+        <script src="../js/react.development.js"></script>
+        <!-- 引入react-dom,用于支持react操作dom -->
+        <script src="../js/react-dom.development.js"></script>
+        <!-- 引入babel,用于将jsx转为js -->
+        <script src="../js/babel.min.js"></script>
+
+        <script type="text/babel">
+            // 创建组件
+            class Demo extends React.Component {
+                // 展示左侧数据
+                showData = () => {
+                    // const {input1} = this.refs
+                    // alert(input1.value)
+                    console.log(this);
+                    // 这里取input1节点就不从refs上取了，直接从this上取。
+                    const {input1} = this
+                    alert(input1.value)
+                };
+                // 展示右侧输入框的数据
+                showData2 = ()=>{
+                    // const {input2} = this.refs
+                    // alert(input2.value)
+                    const {input2} = this
+                    alert(input2.value)
+                }
+
+                render() {
+                    // ref = {(currentNode)=>{ this.input1 = currentNode }}
+                    // ref中写箭头函数 react会自动帮你调用。
+                    return (
+                        <div>
+                            <input ref={currentNode => this.input1 = currentNode} type="text" placeholder="点击按钮提示数据" />
+                            <button onClick={this.showData}>点我提示左侧的数据</button>  
+                            <input ref={currentNode => this.input2 = currentNode} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
+                        </div>
+                    );
+                }
+            }
 
 
 
-####  2.4.3 回调ref中回调函数执行次数的问题
+            // 渲染组件到页面
+            ReactDOM.render(<Demo />, document.getElementById("test"));
+        </script>
+    </body>
+</html>
+```
+
+#### 2.4.3 回调ref中回调函数执行次数的问题
 
 React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.html
 
 > ### 关于回调 refs 的说明
->
+> 
 > 如果 `ref` 回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数 `null`，然后第二次会传入参数 DOM 元素。这是因为在每次渲染时会创建一个新的函数实例，所以 React 清空旧的 ref 并且设置新的。通过将 ref 的回调函数定义成 class 的绑定函数的方式可以避免上述问题，但是大多数情况下它是无关紧要的。
 
 ```html
@@ -927,7 +915,7 @@ React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.
                             <h2>今天天气很{isHot ? "炎热" : "凉爽"}</h2>
                         {/* 内联函数<input ref={(c) => {this.input1 = c;console.log('@',c);}}/>*/}
                             <input ref={this.saveInput} />
-                            <button onClick={this.changeWeather}>切换状态</button>&nbsp;&nbsp;
+                            <button onClick={this.changeWeather}>切换状态</button>  
                             {/* <input ref={c => this.input2 = c} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" /> */}
                         </div>
                     );
@@ -939,7 +927,6 @@ React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.
         </script>
     </body>
 </html>
-
 ```
 
 #### 2.4.4 createRef的使用
@@ -985,33 +972,32 @@ React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.
                     return (
                         <div>
                             <input ref={this.myRef} type="text" placeholder="点击按钮提示数据" />
-                            <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;&nbsp;
+                            <button onClick={this.showData}>点我提示左侧的数据</button>  
                             <input ref={this.myRef2} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
                         </div>
                     );
                 }
             }
-        
-            
+
+
 
             // 渲染组件到页面
             ReactDOM.render(<Demo />, document.getElementById("test"));
         </script>
     </body>
 </html>
-
 ```
 
 #### 2.4.5 refs的总结
 
 1. 字符串形式的ref
-
+   
         ```html
         <input ref="input1"/>
         ```
 
 2. 回调形式的ref
-
+   
    ```html
    <input ref={(c)=>{this.input1 = c}}/>
    ```
@@ -1023,7 +1009,7 @@ myRef = React.createRef()
 <input ref={this.myRef}/>
 ```
 
-###   2.5 React中的事件处理
+### 2.5 React中的事件处理
 
 1. 通过onXxx属性指定事件处理函数（注意大小写）
 
@@ -1073,22 +1059,19 @@ myRef = React.createRef()
                     return (
                         <div>
                             <input ref={this.myRef} type="text" placeholder="点击按钮提示数据" />
-                            <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;&nbsp;
+                            <button onClick={this.showData}>点我提示左侧的数据</button>  
                             <input ref={this.myRef2} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
                         </div>
                     );
                 }
             }
-        
+
             // 渲染组件到页面
             ReactDOM.render(<Demo />, document.getElementById("test"));
         </script>
     </body>
 </html>
-
 ```
-
-
 
 ### 2.6  收集表单数据
 
@@ -1118,7 +1101,7 @@ myRef = React.createRef()
 
         <script type="text/babel">
             class Login extends React.Component {
-            
+
                 render() {
                     return (
                         <form action="https://www.baidu.com" onSubmit={this.handleSubmit}>
@@ -1152,7 +1135,6 @@ myRef = React.createRef()
         </script>
     </body>
 </html>
-
 ```
 
 #### 2.6.2 受控组件
@@ -1218,7 +1200,6 @@ myRef = React.createRef()
         </script>
     </body>
 </html>
-
 ```
 
 ### 2.7 高阶函数——函数柯力化
@@ -1295,14 +1276,13 @@ myRef = React.createRef()
         </script>
     </body>
 </html>
-
 ```
 
 ### 2.8 组件的生命周期
 
 理解：
 
-1.   组件从创建到死亡它会经历一些特定的阶段。
+1. 组件从创建到死亡它会经历一些特定的阶段。
 
 2. React组件中包含一系列勾子函数(生命周期回调函数), 会在特定的时刻调用。
 
@@ -1315,27 +1295,31 @@ myRef = React.createRef()
 生命周期的三个阶段（旧）
 
 1. **初始化阶段**: 由ReactDOM.render()触发---初次渲染
-
+   
    1. constructor()
+   
    2. componentWillMount()
+   
    3. render()
+   
    4. **componentDidMount()** =====> 常用
-
+      
       一般在这个钩子中做一些初始化的事，例如：开启定时器、发送网络请求、订阅消息
 
 2. **更新阶段**: 由组件内部this.setSate()或父组件render触发
+   
    1. shouldComponentUpdate()
-
+   
    2. componentWillUpdate()
-
+   
    3. **render()** =====> 必须使用的一个
-
+   
    4. componentDidUpdate()
 
 3. **卸载组件**: 由ReactDOM.unmountComponentAtNode()触发
-
+   
    1. **componentWillUnmount()** =====> 常用
-
+   
    ​    一般在这个钩子中做一些收尾的事，例如：关闭定时器、取消订阅消息
 
 ```html
@@ -1465,7 +1449,6 @@ myRef = React.createRef()
         </script>
     </body>
 </html>
-
 ```
 
 #### 2.8.2 生命周期（新）
@@ -1478,123 +1461,125 @@ myRef = React.createRef()
 
 1. constructor()
 
-2.   **getDerivedStateFromProps** 
-3.   render()
+2. **getDerivedStateFromProps** 
+
+3. render()
 
 4. componentDidMount()
 
 **2.** **更新阶段:** 由组件内部this.setSate()或父组件重新render触发
 
-1.   **getDerivedStateFromProps**
+1. **getDerivedStateFromProps**
 
 2. shouldComponentUpdate()
 
 3. render()
+
 4. **getSnapshotBeforeUpdate**
 
 5. componentDidUpdate()
+   
+   **3.** **卸载组件:** 由ReactDOM.unmountComponentAtNode()触发
 
- **3.** **卸载组件:** 由ReactDOM.unmountComponentAtNode()触发
-
-1. componentWillUnmount()
+6. componentWillUnmount()
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>3_react生命周期(新)</title>
+    <meta charset="UTF-8">
+    <title>3_react生命周期(新)</title>
 </head>
 <body>
-	<!-- 准备好一个“容器” -->
-	<div id="test"></div>
-	
-	<!-- 引入react核心库 -->
-	<script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
-	<!-- 引入react-dom，用于支持react操作DOM -->
-	<script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
-	<!-- 引入babel，用于将jsx转为js -->
-	<script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
 
-	<script type="text/babel">
-		//创建组件
-		class Count extends React.Component{
-			//构造器
-			constructor(props){
-				console.log('Count---constructor');
-				super(props)
-				//初始化状态
-				this.state = {count:0}
-			}
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
 
-			//加1按钮的回调
-			add = ()=>{
-				//获取原状态
-				const {count} = this.state
-				//更新状态
-				this.setState({count:count+1})
-			}
+    <script type="text/babel">
+        //创建组件
+        class Count extends React.Component{
+            //构造器
+            constructor(props){
+                console.log('Count---constructor');
+                super(props)
+                //初始化状态
+                this.state = {count:0}
+            }
 
-			//卸载组件按钮的回调
-			death = ()=>{
-				ReactDOM.unmountComponentAtNode(document.getElementById('test'))
-			}
+            //加1按钮的回调
+            add = ()=>{
+                //获取原状态
+                const {count} = this.state
+                //更新状态
+                this.setState({count:count+1})
+            }
 
-			//强制更新按钮的回调
-			force = ()=>{
-				this.forceUpdate()
-			}
-			
-			//若state的值在任何时候都取决于props，那么可以使用getDerivedStateFromProps
-			static getDerivedStateFromProps(props,state){
-				console.log('getDerivedStateFromProps',props,state);
-				return null
-			}
+            //卸载组件按钮的回调
+            death = ()=>{
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
 
-			//在更新之前获取快照
-			getSnapshotBeforeUpdate(){
-				console.log('getSnapshotBeforeUpdate');
-				return 'atguigu'
-			}
+            //强制更新按钮的回调
+            force = ()=>{
+                this.forceUpdate()
+            }
 
-			//组件挂载完毕的钩子
-			componentDidMount(){
-				console.log('Count---componentDidMount');
-			}
+            //若state的值在任何时候都取决于props，那么可以使用getDerivedStateFromProps
+            static getDerivedStateFromProps(props,state){
+                console.log('getDerivedStateFromProps',props,state);
+                return null
+            }
 
-			//组件将要卸载的钩子
-			componentWillUnmount(){
-				console.log('Count---componentWillUnmount');
-			}
+            //在更新之前获取快照
+            getSnapshotBeforeUpdate(){
+                console.log('getSnapshotBeforeUpdate');
+                return 'atguigu'
+            }
 
-			//控制组件更新的“阀门”
-			shouldComponentUpdate(){
-				console.log('Count---shouldComponentUpdate');
-				return true
-			}
+            //组件挂载完毕的钩子
+            componentDidMount(){
+                console.log('Count---componentDidMount');
+            }
 
-			//组件更新完毕的钩子
-			componentDidUpdate(preProps,preState,snapshotValue){
-				console.log('Count---componentDidUpdate',preProps,preState,snapshotValue);
-			}
-			
-			render(){
-				console.log('Count---render');
-				const {count} = this.state
-				return(
-					<div>
-						<h2>当前求和为：{count}</h2>
-						<button onClick={this.add}>点我+1</button>
-						<button onClick={this.death}>卸载组件</button>
-						<button onClick={this.force}>不更改任何状态中的数据，强制更新一下</button>
-					</div>
-				)
-			}
-		}
-		
-		//渲染组件
-		ReactDOM.render(<Count count={199}/>,document.getElementById('test'))
-	</script>
+            //组件将要卸载的钩子
+            componentWillUnmount(){
+                console.log('Count---componentWillUnmount');
+            }
+
+            //控制组件更新的“阀门”
+            shouldComponentUpdate(){
+                console.log('Count---shouldComponentUpdate');
+                return true
+            }
+
+            //组件更新完毕的钩子
+            componentDidUpdate(preProps,preState,snapshotValue){
+                console.log('Count---componentDidUpdate',preProps,preState,snapshotValue);
+            }
+
+            render(){
+                console.log('Count---render');
+                const {count} = this.state
+                return(
+                    <div>
+                        <h2>当前求和为：{count}</h2>
+                        <button onClick={this.add}>点我+1</button>
+                        <button onClick={this.death}>卸载组件</button>
+                        <button onClick={this.force}>不更改任何状态中的数据，强制更新一下</button>
+                    </div>
+                )
+            }
+        }
+
+        //渲染组件
+        ReactDOM.render(<Count count={199}/>,document.getElementById('test'))
+    </script>
 </body>
 </html>
 ```
@@ -1603,19 +1588,19 @@ myRef = React.createRef()
 
 **重要的勾子**
 
-1.   render：初始化渲染或更新渲染调用
+1. render：初始化渲染或更新渲染调用
 
-2.   componentDidMount：开启监听, 发送ajax请求
+2. componentDidMount：开启监听, 发送ajax请求
 
-3.   componentWillUnmount：做一些收尾工作, 如: 清理定时器
+3. componentWillUnmount：做一些收尾工作, 如: 清理定时器
 
 **即将废弃的勾子**
 
-1.   componentWillMount
+1. componentWillMount
 
-2.   componentWillReceiveProps
+2. componentWillReceiveProps
 
-3.   componentWillUpdate
+3. componentWillUpdate
 
 现在使用会出现警告，下一个大版本需要加上UNSAFE_前缀才能使用，以后可能会被彻底废弃，不建议使用。
 
@@ -1631,47 +1616,46 @@ myRef = React.createRef()
   <title>验证diff算法</title>
 </head>
 <body>
-	<!-- 准备好一个“容器” -->
-	<div id="test"></div>
-	
-	<!-- 引入react核心库 -->
-	<script type="text/javascript" src="../js/react.development.js"></script>
-	<!-- 引入react-dom，用于支持react操作DOM -->
-	<script type="text/javascript" src="../js/react-dom.development.js"></script>
-	<!-- 引入babel，用于将jsx转为js -->
-	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
 
-	<script type="text/babel">
-		class Time extends React.Component {
-			state = {date: new Date()}
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
 
-			componentDidMount () {
-				setInterval(() => {
-					this.setState({
-						date: new Date()
-					})
-				}, 1000)
-			}
+    <script type="text/babel">
+        class Time extends React.Component {
+            state = {date: new Date()}
 
-			render () {
-				return (
-					<div>
-						<h1>hello</h1>
-						<input type="text"/>
-						<span>
-							现在是：{this.state.date.toTimeString()}
-							<input type="text"/>
-						</span>
-					</div>
-				)
-			}
-		}
+            componentDidMount () {
+                setInterval(() => {
+                    this.setState({
+                        date: new Date()
+                    })
+                }, 1000)
+            }
 
-		ReactDOM.render(<Time/>,document.getElementById('test'))
+            render () {
+                return (
+                    <div>
+                        <h1>hello</h1>
+                        <input type="text"/>
+                        <span>
+                            现在是：{this.state.date.toTimeString()}
+                            <input type="text"/>
+                        </span>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Time/>,document.getElementById('test'))
 </script>
 </body>
 </html>
-
 ```
 
 **key的作用**
@@ -1693,127 +1677,125 @@ myRef = React.createRef()
 <script type="text/javascript" src="../js/babel.min.js"></script>
 
 <script type="text/babel">
-	/*
+    /*
    经典面试题:
       1). react/vue中的key有什么作用？（key的内部原理是什么？）
       2). 为什么遍历列表时，key最好不要用index?
-      
-			1. 虚拟DOM中key的作用：
-					1). 简单的说: key是虚拟DOM对象的标识, 在更新显示时key起着极其重要的作用。
 
-					2). 详细的说: 当状态中的数据发生变化时，react会根据【新数据】生成【新的虚拟DOM】, 
-												随后React进行【新虚拟DOM】与【旧虚拟DOM】的diff比较，比较规则如下：
+            1. 虚拟DOM中key的作用：
+                    1). 简单的说: key是虚拟DOM对象的标识, 在更新显示时key起着极其重要的作用。
 
-									a. 旧虚拟DOM中找到了与新虚拟DOM相同的key：
-												(1).若虚拟DOM中内容没变, 直接使用之前的真实DOM
-												(2).若虚拟DOM中内容变了, 则生成新的真实DOM，随后替换掉页面中之前的真实DOM
+                    2). 详细的说: 当状态中的数据发生变化时，react会根据【新数据】生成【新的虚拟DOM】, 
+                                                随后React进行【新虚拟DOM】与【旧虚拟DOM】的diff比较，比较规则如下：
 
-									b. 旧虚拟DOM中未找到与新虚拟DOM相同的key
-												根据数据创建新的真实DOM，随后渲染到到页面
-									
-			2. 用index作为key可能会引发的问题：
-								1. 若对数据进行：逆序添加、逆序删除等破坏顺序操作:
-												会产生没有必要的真实DOM更新 ==> 界面效果没问题, 但效率低。
+                                    a. 旧虚拟DOM中找到了与新虚拟DOM相同的key：
+                                                (1).若虚拟DOM中内容没变, 直接使用之前的真实DOM
+                                                (2).若虚拟DOM中内容变了, 则生成新的真实DOM，随后替换掉页面中之前的真实DOM
 
-								2. 如果结构中还包含输入类的DOM：
-												会产生错误DOM更新 ==> 界面有问题。
-												
-								3. 注意！如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，
-									仅用于渲染列表用于展示，使用index作为key是没有问题的。
-					
-			3. 开发中如何选择key?:
-								1.最好使用每条数据的唯一标识作为key, 比如id、手机号、身份证号、学号等唯一值。
-								2.如果确定只是简单的展示数据，用index也是可以的。
+                                    b. 旧虚拟DOM中未找到与新虚拟DOM相同的key
+                                                根据数据创建新的真实DOM，随后渲染到到页面
+
+            2. 用index作为key可能会引发的问题：
+                                1. 若对数据进行：逆序添加、逆序删除等破坏顺序操作:
+                                                会产生没有必要的真实DOM更新 ==> 界面效果没问题, 但效率低。
+
+                                2. 如果结构中还包含输入类的DOM：
+                                                会产生错误DOM更新 ==> 界面有问题。
+
+                                3. 注意！如果不存在对数据的逆序添加、逆序删除等破坏顺序操作，
+                                    仅用于渲染列表用于展示，使用index作为key是没有问题的。
+
+            3. 开发中如何选择key?:
+                                1.最好使用每条数据的唯一标识作为key, 比如id、手机号、身份证号、学号等唯一值。
+                                2.如果确定只是简单的展示数据，用index也是可以的。
    */
-	
-	/* 
-		慢动作回放----使用index索引值作为key
 
-			初始数据：
-					{id:1,name:'小张',age:18},
-					{id:2,name:'小李',age:19},
-			初始的虚拟DOM：
-					<li key=0>小张---18<input type="text"/></li>
-					<li key=1>小李---19<input type="text"/></li>
+    /* 
+        慢动作回放----使用index索引值作为key
 
-			更新后的数据：
-					{id:3,name:'小王',age:20},
-					{id:1,name:'小张',age:18},
-					{id:2,name:'小李',age:19},
-			更新数据后的虚拟DOM：
-					<li key=0>小王---20<input type="text"/></li>
-					<li key=1>小张---18<input type="text"/></li>
-					<li key=2>小李---19<input type="text"/></li>
+            初始数据：
+                    {id:1,name:'小张',age:18},
+                    {id:2,name:'小李',age:19},
+            初始的虚拟DOM：
+                    <li key=0>小张---18<input type="text"/></li>
+                    <li key=1>小李---19<input type="text"/></li>
 
-	-----------------------------------------------------------------
+            更新后的数据：
+                    {id:3,name:'小王',age:20},
+                    {id:1,name:'小张',age:18},
+                    {id:2,name:'小李',age:19},
+            更新数据后的虚拟DOM：
+                    <li key=0>小王---20<input type="text"/></li>
+                    <li key=1>小张---18<input type="text"/></li>
+                    <li key=2>小李---19<input type="text"/></li>
 
-	慢动作回放----使用id唯一标识作为key
+    -----------------------------------------------------------------
 
-			初始数据：
-					{id:1,name:'小张',age:18},
-					{id:2,name:'小李',age:19},
-			初始的虚拟DOM：
-					<li key=1>小张---18<input type="text"/></li>
-					<li key=2>小李---19<input type="text"/></li>
+    慢动作回放----使用id唯一标识作为key
 
-			更新后的数据：
-					{id:3,name:'小王',age:20},
-					{id:1,name:'小张',age:18},
-					{id:2,name:'小李',age:19},
-			更新数据后的虚拟DOM：
-					<li key=3>小王---20<input type="text"/></li>
-					<li key=1>小张---18<input type="text"/></li>
-					<li key=2>小李---19<input type="text"/></li>
+            初始数据：
+                    {id:1,name:'小张',age:18},
+                    {id:2,name:'小李',age:19},
+            初始的虚拟DOM：
+                    <li key=1>小张---18<input type="text"/></li>
+                    <li key=2>小李---19<input type="text"/></li>
+
+            更新后的数据：
+                    {id:3,name:'小王',age:20},
+                    {id:1,name:'小张',age:18},
+                    {id:2,name:'小李',age:19},
+            更新数据后的虚拟DOM：
+                    <li key=3>小王---20<input type="text"/></li>
+                    <li key=1>小张---18<input type="text"/></li>
+                    <li key=2>小李---19<input type="text"/></li>
 
 
-	 */
-	class Person extends React.Component{
+     */
+    class Person extends React.Component{
 
-		state = {
-			persons:[
-				{id:1,name:'小张',age:18},
-				{id:2,name:'小李',age:19},
-			]
-		}
+        state = {
+            persons:[
+                {id:1,name:'小张',age:18},
+                {id:2,name:'小李',age:19},
+            ]
+        }
 
-		add = ()=>{
-			const {persons} = this.state
-			const p = {id:persons.length+1,name:'小王',age:20}
-			this.setState({persons:[p,...persons]})
-		}
+        add = ()=>{
+            const {persons} = this.state
+            const p = {id:persons.length+1,name:'小王',age:20}
+            this.setState({persons:[p,...persons]})
+        }
 
-		render(){
-			return (
-				<div>
-					<h2>展示人员信息</h2>
-					<button onClick={this.add}>添加一个小王</button>
-					<h3>使用index（索引值）作为key</h3>
-					<ul>
-						{
-							this.state.persons.map((personObj,index)=>{
-								return <li key={index}>{personObj.name}---{personObj.age}<input type="text"/></li>
-							})
-						}
-					</ul>
-					<hr/>
-					<hr/>
-					<h3>使用id（数据的唯一标识）作为key</h3>
-					<ul>
-						{
-							this.state.persons.map((personObj)=>{
-								return <li key={personObj.id}>{personObj.name}---{personObj.age}<input type="text"/></li>
-							})
-						}
-					</ul>
-				</div>
-			)
-		}
-	}
+        render(){
+            return (
+                <div>
+                    <h2>展示人员信息</h2>
+                    <button onClick={this.add}>添加一个小王</button>
+                    <h3>使用index（索引值）作为key</h3>
+                    <ul>
+                        {
+                            this.state.persons.map((personObj,index)=>{
+                                return <li key={index}>{personObj.name}---{personObj.age}<input type="text"/></li>
+                            })
+                        }
+                    </ul>
+                    <hr/>
+                    <hr/>
+                    <h3>使用id（数据的唯一标识）作为key</h3>
+                    <ul>
+                        {
+                            this.state.persons.map((personObj)=>{
+                                return <li key={personObj.id}>{personObj.name}---{personObj.age}<input type="text"/></li>
+                            })
+                        }
+                    </ul>
+                </div>
+            )
+        }
+    }
 
-	ReactDOM.render(<Person/>,document.getElementById('test'))
+    ReactDOM.render(<Person/>,document.getElementById('test'))
 </script>
 </body>
 </html>
-
 ```
-
