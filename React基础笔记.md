@@ -373,7 +373,8 @@ jsx语法规则：
                 state = { isHot: true, wind: "微风" };
 
                 render() {
-                    return <h2 onClick={this.changeWeather}>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h2>;
+                    // return <h2 onClick={this.changeWeather}>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h2>;
+                    return <h2 onClick={()=> this.changeWeather()}>今天天气很{this.state.isHot ? "炎热" : "凉爽"}</h2>;
                 }
 
                 // 自定义方法--要用赋值语句和箭头函数的形式
@@ -384,6 +385,12 @@ jsx语法规则：
                     // 状态必须通过setState进行更新，且更新是一种合并，不是替换。
                     this.setState({ isHot: !isHot });
                 };
+
+                // 自定义方法形式之一，在调用时用箭头函数调用
+                changeWeather() {
+                    const isHot = this.state.isHot;
+                    this.setState({ isHot: !isHot });
+                }
             }
 
             // 2.渲染组件
@@ -407,6 +414,10 @@ jsx语法规则：
    a)   强制绑定this: 通过函数对象的bind()
    
    b)   箭头函数+赋值语句
+   
+   c)  普通方法 + 在调用的时候写箭头函数调用。
+   
+   以上是React中自定义函数的三种方法。
 
 3. 状态数据，不能直接修改或更新。必须通过setState()方法。
 
