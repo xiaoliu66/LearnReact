@@ -37,7 +37,7 @@
 #### 1.2.1 两种方式
 
 1. 用jsx方式创建
-   
+  
    ```html
    <body>
        <!-- 准备好一个容器 -->
@@ -59,7 +59,7 @@
    ```
 
 2. 用纯js方式创建（不推荐）
-   
+  
    ```html
    <body>
        <!-- 准备好一个容器 -->
@@ -82,7 +82,7 @@
 
 #### 1.2.2 虚拟DOM和真实DOM的比较
 
-```html
+​```html
 <body>
         <!-- 准备好一个容器 -->
         <div id="test"></div>
@@ -108,7 +108,7 @@
             console.log("真实DOM",TDOM)
         </script>
     </body>
-```
+   ```
 
 <img src="./React基础笔记.assets/image-20210715204255463.png" alt="image-20210715204255463" style="zoom:80%;" />
 关于虚拟DOM:
@@ -410,7 +410,7 @@ jsx语法规则：
 1. 组件中render方法中的this为组件实例对象
 
 2. 组件自定义的方法中this为undefined，如何解决？
-   
+  
    a)   强制绑定this: 通过函数对象的bind()
    
    b)   箭头函数+赋值语句
@@ -709,13 +709,13 @@ Person.propTypes = {
 ```
 
 3. **扩展属性: 将对象的所有属性通过props传递**
-   
+  
    ```javascript
    <Person {...person}/>
    ```
 
 4. **默认属性值：**
-   
+  
    ```javascript
    Person.defaultProps = {
        sex: "不男不女",
@@ -724,7 +724,7 @@ Person.propTypes = {
    ```
 
 5. **组件类的构造函数**
-   
+  
        ```javascript
        constructor(props){
            super(props);
@@ -1002,23 +1002,23 @@ React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.
 #### 2.4.5 refs的总结
 
 1. 字符串形式的ref
-   
-        ```html
-        <input ref="input1"/>
-        ```
+  
+   ```html
+   <input ref="input1"/>
+   ```
 
 2. 回调形式的ref
-   
+  
    ```html
    <input ref={(c)=>{this.input1 = c}}/>
    ```
 
 3. createRef创建ref容器
 
-```html
-myRef = React.createRef()
-<input ref={this.myRef}/>
-```
+    ```html
+    myRef = React.createRef()
+    <input ref={this.myRef}/>
+    ```
 
 ### 2.5 React中的事件处理
 
@@ -1306,7 +1306,7 @@ myRef = React.createRef()
 生命周期的三个阶段（旧）
 
 1. **初始化阶段**: 由ReactDOM.render()触发---初次渲染
-   
+  
    1. constructor()
    
    2. componentWillMount()
@@ -1314,11 +1314,11 @@ myRef = React.createRef()
    3. render()
    
    4. **componentDidMount()** =====> 常用
-      
+     
       一般在这个钩子中做一些初始化的事，例如：开启定时器、发送网络请求、订阅消息
 
 2. **更新阶段**: 由组件内部this.setSate()或父组件render触发
-   
+  
    1. shouldComponentUpdate()
    
    2. componentWillUpdate()
@@ -1328,7 +1328,7 @@ myRef = React.createRef()
    4. componentDidUpdate()
 
 3. **卸载组件**: 由ReactDOM.unmountComponentAtNode()触发
-   
+  
    1. **componentWillUnmount()** =====> 常用
    
    ​    一般在这个钩子中做一些收尾的事，例如：关闭定时器、取消订阅消息
@@ -1489,7 +1489,7 @@ myRef = React.createRef()
 4. **getSnapshotBeforeUpdate**
 
 5. componentDidUpdate()
-   
+  
    **3.** **卸载组件:** 由ReactDOM.unmountComponentAtNode()触发
 
 6. componentWillUnmount()
