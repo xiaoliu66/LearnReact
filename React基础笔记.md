@@ -1305,7 +1305,7 @@ React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.
 
 #### 2.8.1 生命周期（旧）
 
-![image-20210727222603865](D:\web\LearnReact\React基础笔记.assets\2_react生命周期(旧).png)
+![img](./React基础笔记.assets/2_react生命周期(旧).png)
 
 生命周期的三个阶段（旧）
 
@@ -1468,7 +1468,7 @@ React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.
 
 #### 2.8.2 生命周期（新）
 
-![](D:\web\LearnReact\React基础笔记.assets\3_react生命周期(新).png)
+![img](./React基础笔记.assets/3_react生命周期(新).png)
 
 生命周期的三个阶段（新）
 
