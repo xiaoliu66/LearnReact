@@ -1090,6 +1090,8 @@ React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.
 
 #### 2.6.1 非受控组件
 
+非受控组件：所有输入类型的dom（输入框，checkBox等等），如果数据是先用先去，就是非受控组件。
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -1149,6 +1151,8 @@ React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.
 ```
 
 #### 2.6.2 受控组件
+
+受控组件：对于页面上的所有输入类型的dom，随着页面上输入的内容的变化，会将数据维护到React中的state中，需要用数据直接从state中取。这种组件就叫做受控组件（类似于Vue中的双向数据绑定。）
 
 ```html
 <!DOCTYPE html>
