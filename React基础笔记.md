@@ -1024,6 +1024,10 @@ React 官方说法，地址：https://react.docschina.org/docs/refs-and-the-dom.
 
 1. 通过onXxx属性指定事件处理函数（注意大小写）
 
+   onClick事件如果包含() ，就会变成执行函数，页面加载后会自动执行。https://blog.csdn.net/qq_35081500/article/details/107314447
+
+   如果函数没有要传的参数就可以不用括号 onClick={this.props.onClick}，要传参数的就需要箭头函数的写法 onClick={() => this.props.onClick(xxx)}
+
 2. 通过 event.targe得到发生事件的DOM元素对象
 
 ```html
